@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +37,7 @@ public class BicicletaController {
 
     @Transactional
     @PostMapping
-    public Bicicleta addBicicleta(@RequestBody Bicicleta b){
+    public Bicicleta create(@RequestBody Bicicleta b){
         return bicicletaRepository.save(b);
     }
 }
