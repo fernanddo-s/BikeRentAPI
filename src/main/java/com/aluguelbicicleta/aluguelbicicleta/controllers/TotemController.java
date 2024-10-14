@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aluguelbicicleta.aluguelbicicleta.model.Totem;
 import com.aluguelbicicleta.aluguelbicicleta.repository.TotemRepository;
+import com.aluguelbicicleta.aluguelbicicleta.services.TotemService;
 
 import jakarta.transaction.Transactional;
 
@@ -25,6 +26,9 @@ public class TotemController {
     
     @Autowired
     private TotemRepository totemRepository;
+
+    @Autowired
+    private TotemService totemService;
 
     @Transactional
     @GetMapping("/{id}")
@@ -43,11 +47,11 @@ public class TotemController {
         return totemRepository.save(t);
     }
 
-    // @Transactional
-    // @PutMapping("/{id}")//Refatorar
-    // public Totem update(@PathVariable UUID id, @RequestBody Totem t){
-    //     return totemRepository.update(id, t);
-    // }
+    @Transactional
+    @PutMapping("/{id}")//Refatorar
+    public Totem update(@PathVariable UUID id, @RequestBody Totem t){
+        return totemService.update(id, t);
+    }
 
     @Transactional
     @DeleteMapping("/{id}")
