@@ -48,9 +48,9 @@ public class TotemController {
     }
 
     @Transactional
-    @PutMapping("/{id}")//Refatorar
-    public Totem update(@PathVariable UUID id, @RequestBody Totem t){
-        return totemService.update(id, t);
+    @PutMapping
+    public Totem update(@RequestBody Totem t){
+        return totemService.update(t);
     }
 
     @Transactional
