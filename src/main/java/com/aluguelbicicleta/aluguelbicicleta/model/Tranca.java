@@ -27,10 +27,10 @@ import lombok.NoArgsConstructor;
 public class Tranca {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID idTranca;
+    private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "id_totem", nullable = false)
+    @JoinColumn(name = "totem_id")
     private Totem totem;
     
     @OneToOne(mappedBy = "tranca", cascade = CascadeType.ALL)

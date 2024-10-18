@@ -2,7 +2,10 @@ package com.aluguelbicicleta.aluguelbicicleta.model;
 
 import java.util.UUID;
 
+import com.aluguelbicicleta.aluguelbicicleta.deserializer.BicicletaDeserializer;
+import com.aluguelbicicleta.aluguelbicicleta.deserializer.TotemDeserializer;
 import com.aluguelbicicleta.aluguelbicicleta.model.enums.StatusBicicleta;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -22,13 +25,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "bicicletas")
+@JsonDeserialize(using = BicicletaDeserializer.class)
 public class Bicicleta {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID idBicicleta;
+    private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "id_tranca", unique = true)
+    @JoinColumn(name = "tranca_id")
     private Tranca tranca;
 
     private Integer numero;

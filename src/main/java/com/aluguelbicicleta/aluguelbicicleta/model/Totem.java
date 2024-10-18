@@ -3,6 +3,12 @@ package com.aluguelbicicleta.aluguelbicicleta.model;
 import java.util.List;
 import java.util.UUID;
 
+import com.aluguelbicicleta.aluguelbicicleta.deserializer.TotemDeserializer;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,15 +25,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "totens")
+@JsonDeserialize(using = TotemDeserializer.class)
 public class Totem {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID idTotem;
+    private UUID id;
     
     @OneToMany(mappedBy = "totem", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Tranca> trancas;
 
     private String localizacao;
     private Integer capacidade;
     private String descricao;
+
+    @JsonCreator
+    public Totem(@JsonProperty("idTotem") String idTotem) {
+        this.id = UUID.fromString(idTotem);
+    }
 }
