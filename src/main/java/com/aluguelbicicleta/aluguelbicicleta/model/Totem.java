@@ -1,7 +1,6 @@
 package com.aluguelbicicleta.aluguelbicicleta.model;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.aluguelbicicleta.aluguelbicicleta.deserializer.TotemDeserializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -28,8 +27,8 @@ import lombok.NoArgsConstructor;
 @JsonDeserialize(using = TotemDeserializer.class)
 public class Totem {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     @OneToMany(mappedBy = "totem", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -40,7 +39,7 @@ public class Totem {
     private String descricao;
 
     @JsonCreator
-    public Totem(@JsonProperty("idTotem") String idTotem) {
-        this.id = UUID.fromString(idTotem);
+    public Totem(@JsonProperty("id") Long id) {
+        this.id = id;
     }
 }

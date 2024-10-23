@@ -1,12 +1,10 @@
 package com.aluguelbicicleta.aluguelbicicleta.model;
 
-import java.util.UUID;
-
 import com.aluguelbicicleta.aluguelbicicleta.deserializer.BicicletaDeserializer;
-import com.aluguelbicicleta.aluguelbicicleta.deserializer.TotemDeserializer;
 import com.aluguelbicicleta.aluguelbicicleta.model.enums.StatusBicicleta;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -28,11 +26,10 @@ import lombok.NoArgsConstructor;
 @JsonDeserialize(using = BicicletaDeserializer.class)
 public class Bicicleta {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "tranca_id")
+    @OneToOne(mappedBy = "bicicleta", cascade = CascadeType.ALL)
     private Tranca tranca;
 
     private Integer numero;

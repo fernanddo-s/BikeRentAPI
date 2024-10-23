@@ -1,7 +1,5 @@
 package com.aluguelbicicleta.aluguelbicicleta.model;
 
-import java.util.UUID;
-
 import com.aluguelbicicleta.aluguelbicicleta.model.enums.StatusTranca;
 
 import jakarta.persistence.CascadeType;
@@ -26,14 +24,15 @@ import lombok.NoArgsConstructor;
 @Table(name = "trancas")
 public class Tranca {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "totem_id")
     private Totem totem;
     
-    @OneToOne(mappedBy = "tranca", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "bicicleta_id")
     private Bicicleta bicicleta;
 
     private Integer numero;
