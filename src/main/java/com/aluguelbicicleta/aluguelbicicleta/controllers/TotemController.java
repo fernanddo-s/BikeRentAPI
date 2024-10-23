@@ -2,7 +2,6 @@ package com.aluguelbicicleta.aluguelbicicleta.controllers;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aluguelbicicleta.aluguelbicicleta.model.Totem;
-import com.aluguelbicicleta.aluguelbicicleta.repository.TotemRepository;
 import com.aluguelbicicleta.aluguelbicicleta.services.TotemService;
 
 import jakarta.transaction.Transactional;
@@ -23,39 +21,36 @@ import jakarta.transaction.Transactional;
 @RestController
 @RequestMapping("/totem")
 public class TotemController {
-    
-    @Autowired
-    private TotemRepository totemRepository;
 
     @Autowired
     private TotemService totemService;
 
     @Transactional
     @GetMapping("/{id}")
-    public Optional<Totem> findById(@PathVariable UUID id){
-        return totemRepository.findById(id);
+    public Optional<Totem> findById(@PathVariable Long id){
+        return totemService.findById(id);
     }
 
     @GetMapping
     public List<Totem> findAll(){
-        return totemRepository.findAll();
+        return totemService.findAll();
     }
 
     @Transactional
     @PostMapping
     public Totem create(@RequestBody Totem t){
-        return totemRepository.save(t);
+        return totemService.create(t);
     }
 
     @Transactional
-    @PutMapping
-    public Totem update(@RequestBody Totem t){
-        return totemService.update(t);
+    @PutMapping("/{id}")
+    public Totem update(@PathVariable Long id, @RequestBody Totem t){
+        return totemService.update(id, t);
     }
 
     @Transactional
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable UUID id){
-        totemRepository.deleteById(id);
+    public void delete(@PathVariable Long id){
+        totemService.deleteById(id);
     }
 }
