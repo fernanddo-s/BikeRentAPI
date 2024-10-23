@@ -2,7 +2,6 @@ package com.aluguelbicicleta.aluguelbicicleta.model;
 
 import com.aluguelbicicleta.aluguelbicicleta.model.enums.StatusTranca;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
