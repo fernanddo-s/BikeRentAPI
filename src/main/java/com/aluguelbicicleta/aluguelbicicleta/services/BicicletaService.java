@@ -32,7 +32,6 @@ public class BicicletaService {
 
         if (optionalBicicleta.isPresent()) {
             Bicicleta bicicletaExiste = optionalBicicleta.get();
-            //buscar a tranca pelo id, se não vai dar erro
             if(b.getTranca() != null){
                 bicicletaExiste.setTranca(b.getTranca());
             }
