@@ -2,7 +2,6 @@ package com.aluguelbicicleta.aluguelbicicleta.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +33,7 @@ public class TrancaService {
         return trancaRepository.save(t);
     }
 
-    public Optional<Tranca> findById(UUID id){
+    public Optional<Tranca> findById(Long id){
         return trancaRepository.findById(id);
     }
 
@@ -42,11 +41,35 @@ public class TrancaService {
         return trancaRepository.findAll();
     }
 
-    public Tranca update(Tranca t){
-        return trancaRepository.save(t);
+    public Tranca update(Long id, Tranca t){
+        Optional<Tranca> optionalTranca = trancaRepository.findById(id);
+
+        if (optionalTranca.isPresent()) {
+            Tranca trancaExistente = optionalTranca.get();
+            //Verificar como trocar a tranca de totem e a bicicleta
+            if(t.getNumero() != null){
+                trancaExistente.setNumero(t.getNumero());
+            }
+            if(t.getLocalizacao() != null){
+                trancaExistente.setLocalizacao(t.getLocalizacao());
+            }
+            if(t.getAnoFabricacao() != null){
+                trancaExistente.setAnoFabricacao(t.getAnoFabricacao());
+            }
+            if(t.getModelo() != null){
+                trancaExistente.setModelo(t.getModelo());
+            }
+            if(t.getStatus() != null){
+                trancaExistente.setStatus(t.getStatus());
+            }
+            
+            return trancaRepository.save(trancaExistente);
+        } else {
+            throw new RuntimeException("Bicicleta com ID " + id + " não encontrada");
+        }
     }
 
-    public void delete(UUID id){
+    public void delete(Long id){
         trancaRepository.deleteById(id);
     }
 }
