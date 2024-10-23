@@ -41,8 +41,8 @@ public class TrancaController {
         return trancaService.findAll();
     }
 
-    @PutMapping
     @Transactional
+    @PutMapping("/{id}")
     public Tranca update(@PathVariable Long id, @RequestBody Tranca t){
         return trancaService.update(id, t);
     }
