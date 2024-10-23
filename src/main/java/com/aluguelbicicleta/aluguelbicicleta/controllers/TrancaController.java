@@ -2,7 +2,6 @@ package com.aluguelbicicleta.aluguelbicicleta.controllers;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +32,7 @@ public class TrancaController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Tranca> findById(@PathVariable UUID id){
+    public Optional<Tranca> findById(@PathVariable Long id){
         return trancaService.findById(id);
     }
 
@@ -44,13 +43,13 @@ public class TrancaController {
 
     @PutMapping
     @Transactional
-    public Tranca update(@RequestBody Tranca t){
-        return trancaService.update(t);
+    public Tranca update(@PathVariable Long id, @RequestBody Tranca t){
+        return trancaService.update(id, t);
     }
 
-    @DeleteMapping
     @Transactional
-    public void delete(@PathVariable UUID id){
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
         trancaService.delete(id);
     }
 }
