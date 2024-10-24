@@ -48,10 +48,10 @@ public class TrancaService {
             Tranca trancaExistente = optionalTranca.get();
             //Verificar como trocar a tranca de totem e a bicicleta
             if(t.getTotem() != null){
-                trancaExistente.setTotem(t.getTotem());
+                trancaExistente.setTotem(totemRepository.findById(t.getTotem().getId()).get());
             }
             if(t.getBicicleta() != null){
-                trancaExistente.setBicicleta(t.getBicicleta());
+                trancaExistente.setBicicleta(bicicletaRepository.findById(t.getBicicleta().getId()).get());
             }
             if(t.getNumero() != null){
                 trancaExistente.setNumero(t.getNumero());
