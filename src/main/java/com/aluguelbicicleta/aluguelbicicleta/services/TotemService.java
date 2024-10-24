@@ -6,14 +6,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aluguelbicicleta.aluguelbicicleta.model.Bicicleta;
 import com.aluguelbicicleta.aluguelbicicleta.model.Totem;
+import com.aluguelbicicleta.aluguelbicicleta.model.Tranca;
+import com.aluguelbicicleta.aluguelbicicleta.repository.BicicletaRepository;
 import com.aluguelbicicleta.aluguelbicicleta.repository.TotemRepository;
+import com.aluguelbicicleta.aluguelbicicleta.repository.TrancaRepository;
 
 @Service
 public class TotemService {
     
     @Autowired
     private TotemRepository totemRepository;
+
+    @Autowired
+    private TrancaRepository trancaRepository;
+
+    @Autowired
+    private BicicletaRepository bicicletaRepository;
 
     public Totem create(Totem t){
         return totemRepository.save(t);
@@ -50,5 +60,13 @@ public class TotemService {
 
     public void deleteById(Long id){
         totemRepository.deleteById(id);
+    }
+
+    public List<Tranca> findAllTrancasByTotemId(Long id){
+        return trancaRepository.findTrancasByTotemId(id);
+    }
+
+    public List<Bicicleta> findAllBicicletasByTotemId(Long id){
+        return bicicletaRepository.findBicicletasByTotemId(id);
     }
 }
