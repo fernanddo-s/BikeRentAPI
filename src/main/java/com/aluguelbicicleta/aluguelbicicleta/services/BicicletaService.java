@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aluguelbicicleta.aluguelbicicleta.model.Bicicleta;
+import com.aluguelbicicleta.aluguelbicicleta.model.enums.StatusBicicleta;
 import com.aluguelbicicleta.aluguelbicicleta.repository.BicicletaRepository;
 
 @Service
@@ -59,5 +60,20 @@ public class BicicletaService {
 
     public void delete(Long id){
         bicicletaRepository.deleteById(id);
+    }
+
+    public Bicicleta updateStatus(Long id, String acao){
+        Optional<Bicicleta> optionalBicicleta = bicicletaRepository.findById(id);
+        if(optionalBicicleta.isPresent()){
+            Bicicleta bicicletaExiste = optionalBicicleta.get();
+            if(acao != null){
+                StatusBicicleta statusBicicleta = StatusBicicleta.valueOf(acao.toUpperCase());
+                bicicletaExiste.setStatus(statusBicicleta);
+            }
+            
+            return bicicletaRepository.save(bicicletaExiste);
+        } else {
+            throw new RuntimeException("Bicicleta com ID " + id + " não encontrada");
+        }
     }
 }
