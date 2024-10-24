@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aluguelbicicleta.aluguelbicicleta.model.Bicicleta;
 import com.aluguelbicicleta.aluguelbicicleta.model.Tranca;
 import com.aluguelbicicleta.aluguelbicicleta.services.TrancaService;
 
@@ -51,5 +52,10 @@ public class TrancaController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         trancaService.delete(id);
+    }
+
+    @GetMapping("/{id}/bicicleta")
+    public Bicicleta findBicicletaByTrancaId(@PathVariable Long id){
+        return trancaService.findBicicletaByTrancaId(id);
     }
 }

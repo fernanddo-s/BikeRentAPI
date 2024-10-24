@@ -77,4 +77,8 @@ public class TrancaService {
     public void delete(Long id){
         trancaRepository.deleteById(id);
     }
+
+    public Bicicleta findBicicletaByTrancaId(Long id){
+        return trancaRepository.findBicicletaByTrancaId(id);
+    }
 }
