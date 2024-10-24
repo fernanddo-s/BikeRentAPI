@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.aluguelbicicleta.aluguelbicicleta.model.Bicicleta;
 import com.aluguelbicicleta.aluguelbicicleta.model.Totem;
 import com.aluguelbicicleta.aluguelbicicleta.model.Tranca;
+import com.aluguelbicicleta.aluguelbicicleta.model.enums.StatusTranca;
 import com.aluguelbicicleta.aluguelbicicleta.repository.BicicletaRepository;
 import com.aluguelbicicleta.aluguelbicicleta.repository.TotemRepository;
 import com.aluguelbicicleta.aluguelbicicleta.repository.TrancaRepository;
@@ -80,5 +81,22 @@ public class TrancaService {
 
     public Bicicleta findBicicletaByTrancaId(Long id){
         return trancaRepository.findBicicletaByTrancaId(id);
+    }
+
+
+
+    public Tranca updateStatus(Long id, String acao){
+        Optional<Tranca> optionalTranca = trancaRepository.findById(id);
+        if(optionalTranca.isPresent()){
+            Tranca trancaExiste = optionalTranca.get();
+            if(acao != null){
+                StatusTranca statusTranca = StatusTranca.valueOf(acao.toUpperCase());
+                trancaExiste.setStatus(statusTranca);
+            }
+            
+            return trancaRepository.save(trancaExiste);
+        } else {
+            throw new RuntimeException("Tranca com ID " + id + " não encontrada");
+        }
     }
 }
