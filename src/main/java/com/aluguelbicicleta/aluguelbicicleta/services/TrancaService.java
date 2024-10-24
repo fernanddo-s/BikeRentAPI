@@ -83,7 +83,16 @@ public class TrancaService {
         return trancaRepository.findBicicletaByTrancaId(id);
     }
 
+    /*
+     * Falta adicionar regrar para trancar e destrancar
+     */
+    public Tranca trancar(Long id){
+        return this.updateStatus(id, "OCUPADA");
+    }
 
+    public Tranca destrancar(Long id){
+        return this.updateStatus(id, "LIVRE");
+    }
 
     public Tranca updateStatus(Long id, String acao){
         Optional<Tranca> optionalTranca = trancaRepository.findById(id);

@@ -59,11 +59,17 @@ public class TrancaController {
         return trancaService.findBicicletaByTrancaId(id);
     }
 
-    // @Transactional
-    // @PostMapping("/{id}/trancar")
-    // public Tranca trancar(@PathVariable Long id){
-    //     return trancaService.trancar(id);
-    // }
+    @Transactional
+    @PostMapping("/{id}/trancar")
+    public Tranca trancar(@PathVariable Long id){
+        return trancaService.trancar(id);
+    }
+
+    @Transactional
+    @PostMapping("/{id}/destrancar")
+    public Tranca destrancar(@PathVariable Long id){
+        return trancaService.destrancar(id);
+    }
 
     @Transactional
     @PostMapping("/{id}/status/{acao}")
