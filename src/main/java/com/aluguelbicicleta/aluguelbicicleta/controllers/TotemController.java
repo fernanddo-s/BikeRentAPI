@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aluguelbicicleta.aluguelbicicleta.model.Bicicleta;
 import com.aluguelbicicleta.aluguelbicicleta.model.Totem;
+import com.aluguelbicicleta.aluguelbicicleta.model.Tranca;
 import com.aluguelbicicleta.aluguelbicicleta.services.TotemService;
 
 import jakarta.transaction.Transactional;
@@ -52,5 +54,17 @@ public class TotemController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         totemService.deleteById(id);
+    }
+
+    @Transactional
+    @GetMapping("/{id}/trancas")
+    public List<Tranca> findAllTrancasByTotemId(@PathVariable Long id){
+        return totemService.findAllTrancasByTotemId(id);
+    }
+
+    @Transactional
+    @GetMapping("/{id}/bicicletas")
+    public List<Bicicleta> findAllBicicletasByTotemId(@PathVariable Long id){
+        return totemService.findAllBicicletasByTotemId(id);
     }
 }
