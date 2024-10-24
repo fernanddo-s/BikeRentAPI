@@ -53,4 +53,10 @@ public class BicicletaController {
     public void delete(@PathVariable Long id){
         bicicletaService.delete(id);
     }
+
+    @Transactional
+    @PostMapping("/{id}/status/{acao}")
+    public Bicicleta updateStatus(@PathVariable Long id, @PathVariable String acao){
+        return bicicletaService.updateStatus(id, acao);
+    }
 }
