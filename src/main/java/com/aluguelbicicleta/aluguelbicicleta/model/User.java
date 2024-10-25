@@ -34,7 +34,7 @@ public class User implements UserDetails{
     private Long id;
 
     private String cpf;
-    private String email;
+    private String login;
     private Integer idade;
     private UserRole role;
     private String matricula;
@@ -54,6 +54,6 @@ public class User implements UserDetails{
     
     @Override
     public String getUsername() {
-        return email;
+        return login;
     }
 }

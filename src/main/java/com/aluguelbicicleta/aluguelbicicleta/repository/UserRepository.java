@@ -7,5 +7,5 @@ import com.aluguelbicicleta.aluguelbicicleta.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
     
-    UserDetails findByEmail(String email);
+    UserDetails findByLogin(String login);
 }
