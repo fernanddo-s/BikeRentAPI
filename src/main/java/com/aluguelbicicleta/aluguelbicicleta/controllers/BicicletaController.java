@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,5 +59,10 @@ public class BicicletaController {
     @PostMapping("/{id}/status/{acao}")
     public Bicicleta updateStatus(@PathVariable Long id, @PathVariable String acao){
         return bicicletaService.updateStatus(id, acao);
+    }
+
+    @PostMapping("/integrarNaRede")
+    public ResponseEntity integrarNaRede(@RequestBody Long idTranca, @RequestBody Long idBicicleta, @RequestBody Long idFuncionario){
+        return bicicletaService.integrarNaRede(idTranca, idBicicleta, idFuncionario);
     }
 }
