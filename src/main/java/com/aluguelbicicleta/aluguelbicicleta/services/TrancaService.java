@@ -27,10 +27,14 @@ public class TrancaService {
     BicicletaRepository bicicletaRepository;
 
     public Tranca create(Tranca t){
-        Totem totem = totemRepository.findById(t.getTotem().getId()).get();
-        Bicicleta bicicleta = bicicletaRepository.findById(t.getBicicleta().getId()).get();
-        t.setTotem(totem);
-        t.setBicicleta(bicicleta);
+        if (t.getTotem() != null) {
+            Totem totem = totemRepository.findById(t.getTotem().getId()).get();
+            t.setTotem(totem);
+        }
+        if(t.getBicicleta() != null){
+            Bicicleta bicicleta = bicicletaRepository.findById(t.getBicicleta().getId()).get();
+            t.setBicicleta(bicicleta);
+        }
         return trancaRepository.save(t);
     }
 

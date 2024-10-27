@@ -8,14 +8,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.aluguelbicicleta.aluguelbicicleta.model.Bicicleta;
+import com.aluguelbicicleta.aluguelbicicleta.model.Tranca;
 import com.aluguelbicicleta.aluguelbicicleta.model.enums.StatusBicicleta;
 import com.aluguelbicicleta.aluguelbicicleta.repository.BicicletaRepository;
+import com.aluguelbicicleta.aluguelbicicleta.repository.TrancaRepository;
 
 @Service
 public class BicicletaService {
 
     @Autowired
     BicicletaRepository bicicletaRepository;
+
+    @Autowired
+    TrancaRepository trancaRepository;
 
     public Optional<Bicicleta> findById(Long id){
         return bicicletaRepository.findById(id);
@@ -78,9 +83,25 @@ public class BicicletaService {
         }
     }
 
-    public ResponseEntity integrarNaRede(Long idTranca, Long idBicicleta, Long idFuncionario){
-        //recuperar as 3 entidades e verifica se pode fazer o relacionamento entre elas
+    public ResponseEntity integrarNaRede(Long idTranca, Long idBicicleta){
+        //recuperar as 2 entidades e verifica se pode fazer o relacionamento entre elas
+        Optional<Bicicleta> optionalBicicleta = bicicletaRepository.findById(idBicicleta);
+        Optional<Tranca> optionalTranca = trancaRepository.findById(idTranca);
+        if(optionalBicicleta.isPresent() && optionalTranca.isPresent()){
+            Bicicleta bicicletaExiste = optionalBicicleta.get();
+            Tranca trancaExiste = optionalTranca.get();
+
+            if(trancaExiste.getBicicleta() == null){
+                trancaExiste.setBicicleta(bicicletaExiste);
+            } else{
+                return ResponseEntity.badRequest().build();
+            }
+            
+            trancaRepository.save(trancaExiste);
+            return ResponseEntity.ok().build();
+        } else {
+            throw new RuntimeException("Dados inválidos.");
+        }
         
-        return ResponseEntity.ok().build();
     }
 }

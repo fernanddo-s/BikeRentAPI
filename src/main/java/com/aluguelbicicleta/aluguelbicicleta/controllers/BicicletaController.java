@@ -62,7 +62,7 @@ public class BicicletaController {
     }
 
     @PostMapping("/integrarNaRede")
-    public ResponseEntity integrarNaRede(@RequestBody Long idTranca, @RequestBody Long idBicicleta, @RequestBody Long idFuncionario){
-        return bicicletaService.integrarNaRede(idTranca, idBicicleta, idFuncionario);
+    public ResponseEntity integrarNaRede(@RequestBody Long idTranca, @RequestBody Long idBicicleta){
+        return bicicletaService.integrarNaRede(idTranca, idBicicleta);
     }
 }
