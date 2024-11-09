@@ -4,8 +4,11 @@ import UserMenu from '../menu/UserMenu.vue';
 
 <template>
   <div class="main-header">
-    <v-btn size="small" class="btn-click">Texto do botão</v-btn>
-    <UserMenu class="teste"/>
+    <v-btn>Adicionar</v-btn>
+    <v-btn class="btn-click">Remover</v-btn>
+    <div class="teste">
+      <UserMenu/>
+    </div>
   </div>
 </template>
 
@@ -13,12 +16,14 @@ import UserMenu from '../menu/UserMenu.vue';
 .main-header{
   width: 100%;
   height: 50px;
-  background-color: red;
+  background-color: rgb(200, 200, 200);
   display: flex;
   justify-content: end;
   align-items: center;
 }
-
+.teste{
+  margin-right: 10px;
+}
 .btn-click{
   margin: 0 10px 0 10px;
 }
