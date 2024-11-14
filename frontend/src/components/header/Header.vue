@@ -4,9 +4,8 @@ import UserMenu from '../menu/UserMenu.vue';
 
 <template>
   <div class="main-header">
-    <v-btn>Adicionar</v-btn>
-    <v-btn class="btn-click">Remover</v-btn>
-    <div class="teste">
+    <v-btn @click="this.$router.push({ path:'/' })" class="home">Home</v-btn>
+    <div class="user-menu">
       <UserMenu/>
     </div>
   </div>
@@ -18,13 +17,15 @@ import UserMenu from '../menu/UserMenu.vue';
   height: 50px;
   background-color: rgb(200, 200, 200);
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
 }
-.teste{
+
+.user-menu{
   margin-right: 10px;
 }
-.btn-click{
-  margin: 0 10px 0 10px;
+
+.home{
+  margin-left: 10px;
 }
 </style>
