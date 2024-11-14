@@ -3,11 +3,8 @@ import HomeView from './views/HomeView.vue';
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <HomeView/>
-    </div>
-  </header>
+  <router-view>
+  </router-view>
 </template>
 
 <style scoped>
