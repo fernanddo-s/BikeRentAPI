@@ -1,32 +1,26 @@
 <script setup>
 import Header from '@/components/header/Header.vue';
-import { reactive } from 'vue';
+import { onMounted, reactive } from 'vue';
+import axios from 'axios';
+
+const props = defineProps({
+  localizacaoTotem: String
+})
+
+async function getItems() {
+  try {
+    const response = await axios.get("http://localhost:3012/grupo-1-equipamento/bicicleta");
+    console.log(response.data);
+    return Array.isArray(response.data) ? response.data : []; 
+  } catch (error) {
+    console.error("Erro ao buscar dados:", error);
+    return []; 
+  }
+}
 
 const variaveis = reactive({
-  bicicletas: [
-    {
-      "numero": 123,
-      "marca": "Colli",
-      "modelo": "Full Suspension",
-      "ano": "2024",
-      "status": "NOVA"
-    },
-    {
-      "numero": 123,
-      "marca": "Colli",
-      "modelo": "Full Suspension",
-      "ano": "2024",
-      "status": "NOVA"
-    },
-    {
-      "numero": 123,
-      "marca": "Colli",
-      "modelo": "Full Suspension",
-      "ano": "2024",
-      "status": "NOVA"
-    },
-  ],
-  headers:[
+  bicicletas: [], 
+  headers: [
     { title: "Número", key: "numero" },
     { title: "Marca", key: "marca" },
     { title: "Modelo", key: "modelo" },
@@ -36,11 +30,14 @@ const variaveis = reactive({
   ]
 })
 
+onMounted(async () => {
+  variaveis.bicicletas = await getItems();
+});
+
 </script>
 
-
 <template>
-  <Header></Header>
+  <Header />
   <v-data-table :items="variaveis.bicicletas" :headers="variaveis.headers">
     <template v-slot:item.actions="{ item }">
       <v-btn>Alugar</v-btn>
