@@ -1,57 +1,59 @@
 <script setup>
-import { reactive } from 'vue';
-import { useRouter } from 'vue-router';
+import { onMounted, reactive } from 'vue';
+import { getTotems, apagar } from '@/services/TotemService';
+import TotemForm from '../forms/TotemForm.vue';
+import DialogDelete from '../dialogDelete/DialogDelete.vue';
 
 const variaveis = reactive({
-  items: [
-    {
-      "localizacao": "Rua B, 315",
-      "capacidade": 5,
-      "descricao": "Totem de bicicletas da Rua B"
-    },
-    {
-      "localizacao": "Av. Voluntários da Pátria, 315",
-      "capacidade": 5,
-      "descricao": "Totem de bicicletas da Av. Voluntários da Pátria"
-    },
-    {
-      "localizacao": "Rua Josá Júlio Louzada, 315",
-      "capacidade": 5,
-      "descricao": "Totem de bicicletas da Rua Josá Júlio Louzada"
-    },
-    {
-      "localizacao": "Av. João Jaime, 315",
-      "capacidade": 5,
-      "descricao": "Totem de bicicletas da Av. João Jaime"
-    },
-    {
-      "localizacao": "Rua Manoel Duca, 315",
-      "capacidade": 5,
-      "descricao": "Totem de bicicletas da Rua Manoel Duca"
-    },
-  ],
+  totems: [],
   headers: [
     { title: "Localização", key: "localizacao" },
     { title: "Capacidade", key: "capacidade" },
     { title: "Descrição", key: "descricao", sortable: false },
-    { title: "Ações", key: "actions", sortable: false },
+    { title: "Ações", key: "actions", sortable: false, align: 'center' },
   ],
+  totem:{
+    localizacao: '',
+    capacidade: '',
+    descricao: '',
+  },
+  dialogDelete:false
 })
-function goTo(){
-  this.$router.push({path: 'bicicleta'})
+
+function apagarTotem(id) {
+  apagar(id)
 }
+
+onMounted( async() => {
+  variaveis.totems = await getTotems();
+})
 </script>
 
 <template>
-  <v-data-table :items="variaveis.items" :headers="variaveis.headers" class="data-table">
+  <v-data-table :items="variaveis.totems" :headers="variaveis.headers" class="data-table">
+    <template v-slot:top>
+      <v-toolbar flat>
+        <v-toolbar-title>Totens</v-toolbar-title>
+        <v-divider class="mx-4" inset vertical></v-divider>
+        <v-spacer></v-spacer>
+        <totem-form :totem="variaveis.totem" :icon="'mdi-plus'"></totem-form>
+      </v-toolbar>
+    </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon class="mr-3" @click="editItem(item)">
+      <v-icon class="mr-3 btn-actions" @click="editItem(item)">
         mdi-map-marker
       </v-icon>
-      <v-icon @click="$router.push({path: '/bicicleta'})">
+      <v-icon class="btn-actions" @click="this.$router.push({ path:'/bicicleta' })">
         mdi-bicycle
       </v-icon>
+      <v-icon class="btn-actions" size="x-small">
+        <TotemForm :totem="item" :icon="'mdi-pencil'" :editando="true"></TotemForm>
+      </v-icon>
+      <v-icon size="x-small">
+        <DialogDelete :item-id="item.id" :delete-func="apagarTotem"></DialogDelete>
+      </v-icon>
     </template>
+    
   </v-data-table>
 </template>
 
@@ -61,5 +63,9 @@ function goTo(){
   margin: 0;
   border: none;
   width: 90%;
+}
+
+.btn-actions{
+  margin-right: 5px;
 }
 </style>
