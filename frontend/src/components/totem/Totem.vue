@@ -3,6 +3,7 @@ import { onMounted, reactive } from 'vue';
 import { getTotems, apagar } from '@/services/TotemService';
 import TotemForm from '../forms/TotemForm.vue';
 import DialogDelete from '../dialogDelete/DialogDelete.vue';
+import BicicletaView from '@/views/BicicletaView.vue';
 
 const variaveis = reactive({
   totems: [],
@@ -24,13 +25,17 @@ function apagarTotem(id) {
   apagar(id)
 }
 
+function redirecionarMaps(localizacao){
+  
+}
+
 onMounted( async() => {
   variaveis.totems = await getTotems();
 })
 </script>
 
 <template>
-  <v-data-table :items="variaveis.totems" :headers="variaveis.headers" class="data-table">
+  <v-data-table :items="variaveis.totems" :headers="variaveis.headers" class="data-table" show-expand="">
     <template v-slot:top>
       <v-toolbar flat>
         <v-toolbar-title>Totens</v-toolbar-title>
@@ -40,7 +45,7 @@ onMounted( async() => {
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon class="mr-3 btn-actions" @click="editItem(item)">
+      <v-icon class="mr-3 btn-actions" @click="redirecionarMaps(item.localizacao)">
         mdi-map-marker
       </v-icon>
       <v-icon class="btn-actions" @click="this.$router.push({ path:'/bicicleta' })">
@@ -53,7 +58,13 @@ onMounted( async() => {
         <DialogDelete :item-id="item.id" :delete-func="apagarTotem"></DialogDelete>
       </v-icon>
     </template>
-    
+    <template v-slot:expanded-row="{ columns, item }">
+      <tr>
+        <td :colspan="columns.length">
+          <BicicletaView :localizacao-totem="item.localizacao" :id-totem="item.id"></BicicletaView>
+        </td>
+      </tr>
+    </template>
   </v-data-table>
 </template>
 

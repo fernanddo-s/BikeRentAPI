@@ -1,15 +1,15 @@
 <script setup>
-import Header from '@/components/header/Header.vue';
 import { onMounted, reactive } from 'vue';
 import axios from 'axios';
 
 const props = defineProps({
-  localizacaoTotem: String
+  localizacaoTotem: String,
+  idTotem: Number
 })
 
-async function getItems() {
+async function getItems(idTotem) {
   try {
-    const response = await axios.get("http://localhost:3012/grupo-1-equipamento/bicicleta");
+    const response = await axios.get(`http://localhost:3012/grupo-1-equipamento/totem/${idTotem}/bicicletas`);
     console.log(response.data);
     return Array.isArray(response.data) ? response.data : []; 
   } catch (error) {
@@ -31,16 +31,24 @@ const variaveis = reactive({
 })
 
 onMounted(async () => {
-  variaveis.bicicletas = await getItems();
+  variaveis.bicicletas = await getItems(props.idTotem);
 });
 
 </script>
 
 <template>
-  <Header />
-  <v-data-table :items="variaveis.bicicletas" :headers="variaveis.headers">
+  <v-data-table :items="variaveis.bicicletas" :headers="variaveis.headers" :hide-default-footer="true">
+    <!-- <template v-slot:top>
+      <v-toolbar flat>
+        <v-toolbar-title>Bicicletas do totem {{ props.localizacaoTotem }}</v-toolbar-title>
+        <v-divider class="mx-4" inset vertical></v-divider>
+        <v-spacer></v-spacer>
+        <v-btn icon="mdi-plus"></v-btn>
+      </v-toolbar>
+    </template> -->
     <template v-slot:item.actions="{ item }">
       <v-btn>Alugar</v-btn>
+      {{ props.idTotem }}
     </template>
   </v-data-table>
 </template>
