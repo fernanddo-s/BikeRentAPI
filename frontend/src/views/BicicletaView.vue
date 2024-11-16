@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, reactive } from 'vue';
-import { getBicicletas } from '@/services/BicicletaService';
+import { getBicicletas, apagar } from '@/services/BicicletaService';
 import Header from '@/components/header/Header.vue';
 import DialogDelete from '@/components/dialogDelete/DialogDelete.vue';
 import BicicletaForm from '@/components/forms/BicicletaForm.vue';
@@ -16,6 +16,10 @@ const variaveis = reactive({
     { title: "Ações", key: "actions" },
   ]
 })
+
+function apagarBicicleta(id) {
+  apagar(id)
+}
 
 onMounted(async () => {
   variaveis.bicicletas = await getBicicletas();
