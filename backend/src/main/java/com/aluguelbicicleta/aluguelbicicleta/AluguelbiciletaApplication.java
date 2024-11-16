@@ -20,10 +20,14 @@ public class AluguelbiciletaApplication {
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/greeting-javaconfig").allowedOrigins("http://localhost:5173");
+			public void addCorsMappings(CorsRegistry registry){
+				registry.addMapping("/**")
+				.allowedOrigins("*")
+				.allowedHeaders("*")
+				.allowedMethods("*");
 			}
 		};
 	}
 
+	
 }
