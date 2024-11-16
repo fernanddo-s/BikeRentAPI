@@ -3,7 +3,7 @@ import { onMounted, reactive } from 'vue';
 import { getTotems, apagar } from '@/services/TotemService';
 import TotemForm from '../forms/TotemForm.vue';
 import DialogDelete from '../dialogDelete/DialogDelete.vue';
-import BicicletaView from '@/views/BicicletaView.vue';
+import Bicicleta from '@/components/bicicleta/Bicicleta.vue';
 
 const variaveis = reactive({
   totems: [],
@@ -25,10 +25,6 @@ function apagarTotem(id) {
   apagar(id)
 }
 
-function redirecionarMaps(localizacao){
-  
-}
-
 onMounted( async() => {
   variaveis.totems = await getTotems();
 })
@@ -45,10 +41,10 @@ onMounted( async() => {
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon class="mr-3 btn-actions" @click="redirecionarMaps(item.localizacao)">
+      <v-icon class="mr-3 btn-actions">
         mdi-map-marker
       </v-icon>
-      <v-icon class="btn-actions" @click="this.$router.push({ path:'/bicicleta' })">
+      <v-icon class="btn-actions">
         mdi-bicycle
       </v-icon>
       <v-icon class="btn-actions" size="x-small">
@@ -61,7 +57,7 @@ onMounted( async() => {
     <template v-slot:expanded-row="{ columns, item }">
       <tr>
         <td :colspan="columns.length">
-          <BicicletaView :localizacao-totem="item.localizacao" :id-totem="item.id"></BicicletaView>
+          <Bicicleta :localizacao-totem="item.localizacao" :id-totem="item.id"></Bicicleta>
         </td>
       </tr>
     </template>
