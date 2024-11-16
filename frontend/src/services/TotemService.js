@@ -1,10 +1,21 @@
 import axios from 'axios';
+// import { API_JAVA_URL, API_NODE_URL } from "./baseService"
 
-const API_URL = 'http://localhost:3012/grupo-1-equipamento';
+const API_URL = "http://localhost:8080";
 
 export async function getTotems(){
   try {
     const response = await axios.get(`${API_URL}/totem`);
+    return Array.isArray(response.data) ? response.data : [];
+  } catch (error) {
+    console.error("Erro ao buscar totems:", error);
+    return [];
+  }
+}
+
+export async function getAllBicicletasByTotem(idTotem){
+  try {
+    const response = await axios.get(`${API_URL}/totem/${idTotem}/bicicletas`);
     return Array.isArray(response.data) ? response.data : [];
   } catch (error) {
     console.error("Erro ao buscar totems:", error);

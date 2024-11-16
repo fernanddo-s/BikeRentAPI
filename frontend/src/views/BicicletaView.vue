@@ -1,21 +1,14 @@
 <script setup>
 import { onMounted, reactive } from 'vue';
-import axios from 'axios';
+import { getAllBicicletasByTotem } from '@/services/TotemService';
 
 const props = defineProps({
   localizacaoTotem: String,
   idTotem: Number
 })
 
-async function getItems(idTotem) {
-  try {
-    const response = await axios.get(`http://localhost:3012/grupo-1-equipamento/totem/${idTotem}/bicicletas`);
-    console.log(response.data);
-    return Array.isArray(response.data) ? response.data : []; 
-  } catch (error) {
-    console.error("Erro ao buscar dados:", error);
-    return []; 
-  }
+async function getBicicletas(idTotem) {
+  return getAllBicicletasByTotem(idTotem)
 }
 
 const variaveis = reactive({
@@ -31,7 +24,7 @@ const variaveis = reactive({
 })
 
 onMounted(async () => {
-  variaveis.bicicletas = await getItems(props.idTotem);
+  variaveis.bicicletas = await getBicicletas(props.idTotem);
 });
 
 </script>
