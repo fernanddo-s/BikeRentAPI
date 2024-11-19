@@ -1,0 +1,31 @@
+-- Tela Home
+    Menu
+    Listar os totem
+        cada totem tem sua lista de trancas
+            cada tranca pode estar ou não ocupada
+            se tranca estiver ocupada, pode alugar a bicicleta da tranca
+            se não pode devolver a bicicleta se tiver alguma alugada pelo usuario
+    cadastrar um novo usuario caso ele seja novo
+
+-- Tela de Bicicletas
+    Listar todas as bicicletas do sistema
+    pode cadastrar uma nova bicicleta,
+    pode integrar ou retirar da rede
+    ao integrar na rede é preciso listar os trancas disponiveis em cada totem
+
+-- tela de trancas
+    Listar as trancas
+    Pode cadastrar uma noca tranca
+    pode integrar ou retirar da rede
+        verificar se existe bicicleta associada
+        se existrir deve retirar a bicicleta primeiro
+            (talvez fazer um dialog para retirar a bicicleta da rede)
+    
+-- tela de perfil do usuario
+    mostrar as informações do usuario
+    editar as informações
+
+-- Tela de ususarios(visão de ADMIN)
+    listar todos os usuarios e suas permissões
+    cadastrar um novo usuario
+    

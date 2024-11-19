@@ -1,3 +1,6 @@
+<!-- Mostrar trancas com bicicletas
+  Mudar o comportamento para pode alugar ou devolver bicicleta
+-->
 <script setup>
 import { onMounted, reactive } from 'vue';
 import { getAllBicicletasByTotem } from '@/services/TotemService';

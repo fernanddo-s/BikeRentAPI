@@ -15,10 +15,10 @@ const variaveis = reactive({
     { title: "Status", key: "status" },
     { title: "Ações", key: "actions" },
   ]
-})
+});
 
 function apagarBicicleta(id) {
-  apagar(id)
+  apagar(id);
 }
 
 onMounted(async () => {
