@@ -14,7 +14,7 @@ public interface TrancaRepository extends JpaRepository<Tranca, Long>{
     List<Tranca> findTrancasByTotemId(Long totemId);
 
     @Query("select b from Bicicleta b \n" + //
-            "inner join Tranca t on t.bicicleta.id =b.id \n" + //
+            "inner join Tranca t on t.bicicleta.id = b.id \n" + //
             "where t.id = :trancaId")
     Bicicleta findBicicletaByTrancaId(@Param("trancaId")Long trancaId);
 }
