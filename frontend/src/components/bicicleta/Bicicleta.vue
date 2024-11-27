@@ -3,39 +3,38 @@
 -->
 <script setup>
 import { onMounted, reactive } from 'vue';
-import { getAllBicicletasByTotem } from '@/services/TotemService';
+import { getAllTrancasByTotem } from '@/services/TotemService';
 
 const props = defineProps({
   localizacaoTotem: String,
   idTotem: Number
 })
 
-async function getBicicletas(idTotem) {
-  return getAllBicicletasByTotem(idTotem)
-}
-
 const variaveis = reactive({
   bicicletas: [], 
+  trancas: [],
   headers: [
-    { title: "Número", key: "numero" },
-    { title: "Marca", key: "marca" },
-    { title: "Modelo", key: "modelo" },
-    { title: "Ano", key: "ano" },
-    { title: "Status", key: "status" },
+    { title: "Número Tranca", key: "numero" },
+    { title: "Status Tranca", key: "status" },
+    { title: "Número Bicileta", key: "bicicleta.numero" },
+    { title: "Marca Bicicleta", key: "bicicleta.marca" },
+    { title: "Modelo Bicicleta", key: "bicicleta.modelo" },
+    { title: "Status Bicicleta", key: "bicicleta.status" },
     { title: "Ações", key: "actions" },
   ]
 })
 
 onMounted(async () => {
-  variaveis.bicicletas = await getBicicletas(props.idTotem);
+  variaveis.trancas = await getAllTrancasByTotem(props.idTotem);
 });
 
 </script>
 
 <template>
-  <v-data-table :items="variaveis.bicicletas" :headers="variaveis.headers" :hide-default-footer="true">
+  <v-data-table :items="variaveis.trancas" :headers="variaveis.headers" :hide-default-footer="true">
     <template v-slot:item.actions="{ item }">
-      <v-btn>Alugar</v-btn>
+      <v-btn v-if="item.bicicleta != null">Alugar</v-btn>
+      <v-btn v-else>Devolver</v-btn>
     </template>
   </v-data-table>
 </template>
