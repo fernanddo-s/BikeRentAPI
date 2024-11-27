@@ -23,6 +23,16 @@ export async function getAllBicicletasByTotem(idTotem){
   }
 }
 
+export async function getAllTrancasByTotem(idTotem){
+  try {
+    const response = await axios.get(`${API_URL}/totem/${idTotem}/trancas`);
+    return Array.isArray(response.data) ? response.data : [];
+  } catch (error) {
+    console.error("Erro ao buscar totems:", error);
+    return [];
+  }
+}
+
 export async function create(totem){
   try {
     const response = await axios.post(`${API_URL}/totem`, totem);
