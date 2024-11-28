@@ -6,7 +6,56 @@ import DialogDelete from '@/components/dialogDelete/DialogDelete.vue';
 import BicicletaForm from '@/components/forms/BicicletaForm.vue';
 
 const variaveis = reactive({
-  bicicletas: [], 
+  bicicletas: [
+    {
+        "id": 5,
+        "numero": 1,
+        "marca": "Monark",
+        "modelo": "Barra Circular",
+        "ano": "2024",
+        "status": "NOVA"
+    },
+    {
+        "id": 7,
+        "numero": 123,
+        "marca": "Colli",
+        "modelo": "Full Suspension",
+        "ano": "2024",
+        "status": "NOVA"
+    },
+    {
+        "id": 8,
+        "numero": 123,
+        "marca": "Colli",
+        "modelo": "Full Suspension",
+        "ano": "2024",
+        "status": "NOVA"
+    },
+    {
+        "id": 1,
+        "numero": 121,
+        "marca": "Outra marca",
+        "modelo": "XYT-400",
+        "ano": "2024",
+        "status": "DISPONIVEL"
+    },
+    {
+        "id": 3,
+        "numero": 1,
+        "marca": "Monark02",
+        "modelo": "Barra Circular",
+        "ano": "2024",
+        "status": "DISPONIVEL"
+    },
+    {
+        "id": 6,
+        "numero": 123,
+        "marca": "Colli",
+        "modelo": "Full Suspension",
+        "ano": "2024",
+        "status": "DISPONIVEL"
+    }
+], 
   headers: [
     { title: "Número", key: "numero" },
     { title: "Marca", key: "marca" },
@@ -20,10 +69,6 @@ const variaveis = reactive({
 function apagarBicicleta(id) {
   apagar(id);
 }
-
-onMounted(async () => {
-  variaveis.bicicletas = await getBicicletas();
-});
 
 </script>
 

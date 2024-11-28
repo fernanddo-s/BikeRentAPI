@@ -1,12 +1,30 @@
 <script setup>
 import { onMounted, reactive } from 'vue';
-import { getTotems, apagar } from '@/services/TotemService';
 import TotemForm from '../forms/TotemForm.vue';
 import DialogDelete from '../dialogDelete/DialogDelete.vue';
 import Bicicleta from '@/components/bicicleta/Bicicleta.vue';
 
 const variaveis = reactive({
-  totems: [],
+  totems: [
+    {
+        "id": 1,
+        "localizacao": "Rua da Água, 410",
+        "capacidade": 10,
+        "descricao": "Totem de bicicletas"
+    },
+    {
+        "id": 3,
+        "localizacao": "Rua B, 315",
+        "capacidade": 5,
+        "descricao": "Totem de bicicletas da Rua B"
+    },
+    {
+        "id": 4,
+        "localizacao": "Novo Totem",
+        "capacidade": 10,
+        "descricao": "Totem para testar o id"
+    }
+  ],
   headers: [
     { title: "Localização", key: "localizacao" },
     { title: "Capacidade", key: "capacidade" },
@@ -21,9 +39,6 @@ const variaveis = reactive({
   dialogDelete:false
 })
 
-function apagarTotem(id) {
-  apagar(id)
-}
 
 onMounted( async() => {
   variaveis.totems = await getTotems();
