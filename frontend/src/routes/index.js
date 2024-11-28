@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import BicicletaView from '@/views/BicicletaView.vue';
 
 const routes = [
   {

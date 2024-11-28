@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import { API_JAVA_URL, API_NODE_URL } from "./baseService"
 
 const API_URL = "http://localhost:8080";
 

@@ -1,7 +1,5 @@
 <script setup>
 import { onMounted, reactive } from 'vue';
-import { getAllTrancasByTotem } from '@/services/TotemService';
-
 const props = defineProps({
   localizacaoTotem: String,
   idTotem: Number
