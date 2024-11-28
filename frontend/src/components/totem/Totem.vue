@@ -39,10 +39,6 @@ const variaveis = reactive({
   dialogDelete:false
 })
 
-
-onMounted( async() => {
-  variaveis.totems = await getTotems();
-})
 </script>
 
 <template>
