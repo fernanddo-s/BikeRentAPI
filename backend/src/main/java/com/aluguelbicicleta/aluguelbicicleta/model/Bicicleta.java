@@ -5,7 +5,9 @@ import com.aluguelbicicleta.aluguelbicicleta.model.enums.StatusBicicleta;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -33,6 +35,8 @@ public class Bicicleta {
     @JsonIgnore
     private Tranca tranca;
 
+    @NonNull
+    @Column(unique = true)
     private Integer numero;
     private String marca;
     private String modelo;
