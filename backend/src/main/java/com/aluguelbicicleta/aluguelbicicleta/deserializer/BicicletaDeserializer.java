@@ -30,9 +30,6 @@ public class BicicletaDeserializer extends JsonDeserializer<Bicicleta> {
             if (node.has("marca")) {
                 bicicleta.setMarca(node.get("marca").asText());
             }
-            if (node.has("marca")) {
-                bicicleta.setMarca(node.get("marca").asText());
-            }
             if (node.has("modelo")) {
                 bicicleta.setModelo(node.get("modelo").asText());
             }
