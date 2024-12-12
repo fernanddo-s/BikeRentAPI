@@ -3,28 +3,10 @@ import { onMounted, reactive } from 'vue';
 import TotemForm from '../forms/TotemForm.vue';
 import DialogDelete from '../dialogDelete/DialogDelete.vue';
 import Bicicleta from '@/components/bicicleta/Bicicleta.vue';
+import { getTotems } from '@/services/TotemService';
 
 const variaveis = reactive({
-  totems: [
-    {
-        "id": 1,
-        "localizacao": "Rua da Água, 410",
-        "capacidade": 10,
-        "descricao": "Totem de bicicletas"
-    },
-    {
-        "id": 3,
-        "localizacao": "Rua B, 315",
-        "capacidade": 5,
-        "descricao": "Totem de bicicletas da Rua B"
-    },
-    {
-        "id": 4,
-        "localizacao": "Novo Totem",
-        "capacidade": 10,
-        "descricao": "Totem para testar o id"
-    }
-  ],
+  totems: [],
   headers: [
     { title: "Localização", key: "localizacao" },
     { title: "Capacidade", key: "capacidade" },
@@ -39,10 +21,19 @@ const variaveis = reactive({
   dialogDelete:false
 })
 
+function novoTotome(totem){
+  variaveis.totems.push(totem);
+}
+
+onMounted( async () => {
+  variaveis.totems = getTotems();
+  console.log(variaveis.totems)
+})
+
 </script>
 
 <template>
-  <v-data-table :items="variaveis.totems" :headers="variaveis.headers" class="data-table" show-expand="">
+  <v-data-table @update:options="variaveis.totems" :items="variaveis.totems" :headers="variaveis.headers" class="data-table" show-expand="">
     <template v-slot:top>
       <v-toolbar flat>
         <v-toolbar-title>Totens</v-toolbar-title>
