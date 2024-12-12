@@ -5,6 +5,7 @@ import { create, update } from '@/services/TotemService'
 const variaveis = reactive({
   dialog:false,
   totem:{
+    id: 0,
     localizacao: '',
     capacidade: '',
     descricao: '',
