@@ -2,10 +2,36 @@ import axios from 'axios';
 
 const API_URL = "http://localhost:8080";
 
-export async function getTotems(){
+let totems = [
+  {
+      "id": 1,
+      "localizacao": "Rua da Água, 410",
+      "capacidade": 10,
+      "descricao": "Totem de bicicletas"
+  },
+  {
+    "id": 2,
+    "localizacao": "Rua do Luis Fernando, 315",
+    "capacidade": 5,
+    "descricao": "Totem de bicicletas da Rua B"
+  },
+  {
+      "id": 3,
+      "localizacao": "Rua B, 315",
+      "capacidade": 5,
+      "descricao": "Totem de bicicletas da Rua B"
+  },
+  {
+      "id": 4,
+      "localizacao": "Novo Totem",
+      "capacidade": 10,
+      "descricao": "Totem para testar o id"
+  }
+]
+
+export function getTotems(){
   try {
-    const response = await axios.get(`${API_URL}/totem`);
-    return Array.isArray(response.data) ? response.data : [];
+    return totems;
   } catch (error) {
     console.error("Erro ao buscar totems:", error);
     return [];
@@ -32,12 +58,14 @@ export async function getAllTrancasByTotem(idTotem){
   }
 }
 
-export async function create(totem){
+export function create(totem){
   try {
-    const response = await axios.post(`${API_URL}/totem`, totem);
-    return Array.isArray(response.data) ? response.data : [];
+    console.log(totem.localizacao)
+    totems.push(totem);
+    console.log(totems)
+    return totems;
   } catch (error) {
-    console.error("Erro ao buscar totems:", error);
+    console.error("Erro ao criar totem:", error);
     return [];
   }
 }
