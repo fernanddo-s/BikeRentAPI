@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, defineEmits } from 'vue';
 import { create, update } from '@/services/TotemService'
 
 const variaveis = reactive({
@@ -22,14 +22,19 @@ const props = defineProps({
   editando: Boolean
 })
 
-async function save(id, totem) {
+const emit = defineEmits([
+  "atualizarTabela"
+]);
+
+function save(id, totem) {
   if(props.editando){
     update(id, totem)
   }else{
-    create(totem);
+    emit("atualizarTabela", totem);
+    // create(totem);
   }
-  variaveis.dialog = false
   limparForm()
+  variaveis.dialog = false;
 }
 
 function limparForm(){

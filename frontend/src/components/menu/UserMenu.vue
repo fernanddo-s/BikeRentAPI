@@ -4,6 +4,7 @@ import { reactive } from 'vue';
 
 const variaveis = reactive({
   items:[
+    { title: 'Listar Usuários' },
     { title: 'Informações da Conta' },
     { title: 'Sair' }
   ]
@@ -20,6 +21,8 @@ const variaveis = reactive({
       <v-list-item v-for="(item, index) in variaveis.items" :key="index">
         <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>
+      <a href="" >ppp</a>
+      <v-btn @click="$router.push({ path:'/usuarios' })" >Usuários</v-btn>
     </v-list>
   </v-menu>
 

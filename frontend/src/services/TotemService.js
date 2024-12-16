@@ -60,9 +60,7 @@ export async function getAllTrancasByTotem(idTotem){
 
 export function create(totem){
   try {
-    console.log(totem.localizacao)
-    totems.push(totem);
-    console.log(totems)
+    totems.push({id: totems.length+1, descricao: totem.descricao, capacidade: totem.capacidade, localizacao: totem.localizacao});
     return totems;
   } catch (error) {
     console.error("Erro ao criar totem:", error);

@@ -45,10 +45,16 @@ const variaveis = reactive({
 </script>
 
 <template>
-  <v-data-table :items="variaveis.trancas" :headers="variaveis.headers" :hide-default-footer="true">
+  <v-data-table :items="variaveis.trancas" :headers="variaveis.headers" :hide-default-footer="true" class="color">
     <template v-slot:item.actions="{ item }">
       <v-btn v-if="item.bicicleta != null">Alugar</v-btn>
       <v-btn v-else>Devolver</v-btn>
     </template>
   </v-data-table>
 </template>
+
+<style scoped>
+.color{
+  background-color: rgb(216, 216, 216);
+}
+</style>

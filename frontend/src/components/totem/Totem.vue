@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import TotemForm from '../forms/TotemForm.vue';
 import DialogDelete from '../dialogDelete/DialogDelete.vue';
 import Bicicleta from '@/components/bicicleta/Bicicleta.vue';
@@ -21,25 +21,33 @@ const variaveis = reactive({
   dialogDelete:false
 })
 
-function novoTotome(totem){
-  variaveis.totems.push(totem);
+let totems2 = ref();
+
+function loadItems(){
+  let response = getTotems();
+  totems2 = response;
+  variaveis.totems = response;
+  console.log(totems2);
+}
+
+function novoTotem(totem){
+  variaveis.totems.push({id: variaveis.totems.length+1, descricao: totem.descricao, capacidade: totem.capacidade, localizacao: totem.localizacao})
 }
 
 onMounted( async () => {
-  variaveis.totems = getTotems();
-  console.log(variaveis.totems)
+  loadItems();
 })
 
 </script>
 
 <template>
-  <v-data-table @update:options="variaveis.totems" :items="variaveis.totems" :headers="variaveis.headers" class="data-table" show-expand="">
+  <v-data-table :items="variaveis.totems" :headers="variaveis.headers" class="data-table" show-expand="">
     <template v-slot:top>
       <v-toolbar flat>
         <v-toolbar-title>Totens</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <totem-form :totem="variaveis.totem" :icon="'mdi-plus'"></totem-form>
+        <totem-form @atualizar-tabela="novoTotem" :totem="variaveis.totem" :icon="'mdi-plus'"></totem-form>
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
@@ -53,7 +61,7 @@ onMounted( async () => {
         <TotemForm :totem="item" :icon="'mdi-pencil'" :editando="true"></TotemForm>
       </v-icon>
       <v-icon size="x-small">
-        <DialogDelete :item-id="item.id" :delete-func="apagarTotem"></DialogDelete>
+        <DialogDelete :item-id="item.id" ></DialogDelete>
       </v-icon>
     </template>
     <template v-slot:expanded-row="{ columns, item }">
