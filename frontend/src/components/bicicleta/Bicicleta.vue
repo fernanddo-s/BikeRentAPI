@@ -8,28 +8,50 @@ const props = defineProps({
 const variaveis = reactive({
   trancas: [
     {
-        "id": 2,
-        "totem": {
-            "id": 3,
-            "localizacao": "Rua B, 315",
-            "capacidade": 5,
-            "descricao": "Totem de bicicletas da Rua B"
-        },
-        "bicicleta": {
-            "id": 3,
-            "numero": 1,
-            "marca": "Monark02",
-            "modelo": "Barra Circular",
-            "ano": "2024",
-            "status": "DISPONIVEL"
-        },
-        "numero": 1,
-        "localizacao": "Localizada na rua C",
-        "anoFabricacao": "2024",
-        "modelo": "Modelo 3D",
-        "status": "OCUPADA"
+      "id": 2,
+      "totem": {
+        "id": 3,
+        "localizacao": "Rua B, 315",
+        "capacidade": 5,
+        "descricao": "Totem de bicicletas da Rua B"
+      },
+      "bicicleta": {
+        "id": 3,
+        "numero": 624,
+        "marca": "Monark02",
+        "modelo": "Barra Circular",
+        "ano": "2024",
+        "status": "DISPONIVEL"
+      },
+      "numero": 757,
+      "localizacao": "Localizada na rua C",
+      "anoFabricacao": "2024",
+      "modelo": "Modelo 3D",
+      "status": "OCUPADA"
+    },
+    {
+      "id": 2,
+      "totem": {
+        "id": 3,
+        "localizacao": "Rua B, 315",
+        "capacidade": 5,
+        "descricao": "Totem de bicicletas da Rua B"
+      },
+      "bicicleta": {
+        "id": 3,
+        "numero": 125,
+        "marca": "Calloi",
+        "modelo": "Modelo 01",
+        "ano": "2024",
+        "status": "DISPONIVEL"
+      },
+      "numero": 315,
+      "localizacao": "Localizada na rua C",
+      "anoFabricacao": "2024",
+      "modelo": "Modelo 3D",
+      "status": "OCUPADA"
     }
-],
+  ],
   headers: [
     { title: "Número Tranca", key: "numero" },
     { title: "Status Tranca", key: "status" },

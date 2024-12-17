@@ -103,7 +103,6 @@ function apagarBicicleta(id) {
       <v-data-table
       :headers="headers"
       :items="desserts"
-      :sort-by="[{ key: 'calories', order: 'asc' }]"
       class="data-table"
     >
       <template v-slot:top>
