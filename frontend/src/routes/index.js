@@ -1,36 +1,36 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: () => import("@/views/HomeView.vue"),
+    path: '/totens',
+    name: 'totens',
+    component: () => import('@/views/TotemView.vue'),
   },
   {
-    path: '/bicicleta',
-    name: 'bicicleta',
-    component: () => import("@/views/BicicletaView.vue")
+    path: '/bicicletas',
+    name: 'bicicletas',
+    component: () => import('@/views/BicicletaView.vue'),
   },
   {
     path: '/usuarios',
     name: 'usuarios',
-    component: () => import("@/views/UsersView.vue")
+    component: () => import('@/views/UsersView.vue'),
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import("@/views/LoginView.vue")
+    component: () => import('@/views/LoginView.vue'),
   },
   {
     path: '/singin',
     name: 'singin',
-    component: () => import("@/views/CadastroUser.vue")
-  }
-];
+    component: () => import('@/views/CadastroUserView.vue'),
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
 })
 
 export default router
