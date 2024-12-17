@@ -9,7 +9,7 @@
           <v-text-field type="text" label="Login" clearable=""></v-text-field>
           <v-text-field type="password" label="Senha" clearable=""></v-text-field>
           <a href="">Não tenho cadastro</a>
-          <v-btn color="primary">ENTRAR</v-btn>
+          <v-btn color="primary" @click="$router.push({ path:'/totens' })">ENTRAR</v-btn>
         </v-card-text>
       </v-card>
     </div>
