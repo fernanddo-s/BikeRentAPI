@@ -18,12 +18,19 @@ const variaveis = reactive({
       <v-btn color="primary" dark v-bind="props" prepend-icon="mdi-account">Conta</v-btn>
     </template>
     <v-list>
-      <v-list-item v-for="(item, index) in variaveis.items" :key="index">
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
+      <v-list-item>
+        <v-list-item-title>
+          <v-btn @click="$router.push({ path:'/usuarios' })" >Usuários</v-btn>
+        </v-list-item-title>
+        <v-list-item-title>
+          <v-btn @click="$router.push({ path:'/bicicletas' })">Bicicletas</v-btn>
+        </v-list-item-title>
       </v-list-item>
-      <a href="" >ppp</a>
-      <v-btn @click="$router.push({ path:'/usuarios' })" >Usuários</v-btn>
     </v-list>
   </v-menu>
 
 </template>
+
+<style scoped>
+
+</style>

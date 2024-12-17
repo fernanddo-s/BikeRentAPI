@@ -4,9 +4,8 @@ import UserMenu from '../menu/UserMenu.vue';
 
 <template>
   <div class="main-header">
-    <v-btn @click="$router.push({ path:'/' })" class="home">Home</v-btn>
+    <v-btn @click="$router.push({ path:'/totens' })" class="home">Home</v-btn>
     <div class="user-menu">
-      <v-btn icon="mdi-bicycle" @click="$router.push({ path:'/bicicleta' })"></v-btn>
       <UserMenu/>
     </div>
   </div>
