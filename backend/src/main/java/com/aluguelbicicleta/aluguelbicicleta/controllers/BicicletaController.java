@@ -17,16 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aluguelbicicleta.aluguelbicicleta.model.Bicicleta;
 import com.aluguelbicicleta.aluguelbicicleta.services.BicicletaService;
 
+// import io.swagger.v3.oas.annotations.Operation;
+// import io.swagger.v3.oas.annotations.responses.ApiResponse;
+// import io.swagger.v3.oas.annotations.responses.ApiResponses;
+// import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 
 @RestController
-@RequestMapping("/bicicleta")
+@RequestMapping(value = "/bicicleta", produces = {"application/json"})
+// @Tag(name = "bicicleta")
 public class BicicletaController {
     
     @Autowired
     private BicicletaService bicicletaService;
 
     @GetMapping
+    // @Operation(summary = "Busca todas as bicicletas", method = "GET")
+    // @ApiResponses(value = {
+    //     @ApiResponse(responseCode = "200", description = "Lista de bicicletas"),
+    // })
     public List<Bicicleta> findAll(){
         return bicicletaService.findAll();
     }
