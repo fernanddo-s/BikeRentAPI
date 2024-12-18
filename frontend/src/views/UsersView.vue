@@ -139,48 +139,43 @@ function initialize() {
 }
 
 function editItem(item) {
-  editedIndex.value = desserts.value.indexOf(item)
-  editedItem.value = { ...item }
-  dialog.value = true
+  editedIndex.value = desserts.value.indexOf(item);
+  editedItem.value = { ...item };
+  dialog.value = true;
 }
 
 function deleteItem(item) {
-  editedIndex.value = desserts.value.indexOf(item)
-  editedItem.value = { ...item }
-  dialogDelete.value = true
+  editedIndex.value = desserts.value.indexOf(item);
+  editedItem.value = { ...item };
+  dialogDelete.value = true;
 }
 
 function deleteItemConfirm() {
-  desserts.value.splice(editedIndex.value, 1)
-  closeDelete()
+  desserts.value.splice(editedIndex.value, 1);
+  closeDelete();
 }
 
 function close() {
-  dialog.value = false
+  dialog.value = false;
   nextTick(() => {
-    editedItem.value = { ...defaultItem }
-    editedIndex.value = -1
+    editedItem.value = { ...defaultItem };
+    editedIndex.value = -1;
   })
 }
 
 function closeDelete() {
-  dialogDelete.value = false
+  dialogDelete.value = false;
   nextTick(() => {
-    editedItem.value = { ...defaultItem }
-    editedIndex.value = -1
+    editedItem.value = { ...defaultItem };
+    editedIndex.value = -1;
   })
 }
 
 function save() {
   if (editedIndex.value > -1) {
-    Object.assign(desserts.value[editedIndex.value], editedItem.value)
+    Object.assign(desserts.value[editedIndex.value], editedItem.value);
   } else {
-    // let u = addUsuario({ ...editedItem.value });
-    // console.log("Lista de usuário vindo do addUsuario", u);
-    // desserts.value = [];
-    // desserts.value = getUsuarios();
-    // console.log("Lista de usuarios pegando do getUsuarios de pois de um array vazio", desserts.value);
-    desserts.value.push({ ...editedItem.value }) // código original
+    desserts.value.push({ ...editedItem.value });
   }
   close()
 }
