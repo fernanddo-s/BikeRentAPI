@@ -1,13 +1,13 @@
 <script setup>
 import Header from '@/components/header/Header.vue';
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
 import TotemForm from '@/components/forms/TotemForm.vue';
 import DialogDelete from '@/components/dialogDelete/DialogDelete.vue';
 import Bicicleta from '@/components/bicicleta/Bicicleta.vue';
-import { getTotems } from '@/services/TotemService';
+import { getTotens } from '@/services/TotemService';
 
 const variaveis = reactive({
-  totems: [],
+  totens: [],
   headers: [
     { title: "Localização", key: "localizacao" },
     { title: "Capacidade", key: "capacidade" },
@@ -23,15 +23,10 @@ const variaveis = reactive({
 })
 
 function loadItems(){
-  let response = getTotems();
-  variaveis.totems = response;
+  variaveis.totens = getTotens();
 }
 
-function novoTotem(totem){
-  variaveis.totems.push({localizacao: totem.localizacao, capacidade: totem.capacidade, descricao: totem.descricao})
-}
-
-onMounted( async () => {
+onMounted(async () => {
   loadItems();
 })
 </script>
@@ -39,13 +34,13 @@ onMounted( async () => {
 <template>
   <Header></Header>
   <div class="div">
-    <v-data-table :items="variaveis.totems" :headers="variaveis.headers" class="data-table" show-expand="">
+    <v-data-table :items="variaveis.totens" :headers="variaveis.headers" class="data-table" show-expand="">
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>Totens</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          <totem-form @atualizar-tabela="novoTotem" :totem="variaveis.totem" :icon="'mdi-plus'"></totem-form>
+          <totem-form @atualizar-tabela="loadItems()" :totem="variaveis.totem" :icon="'mdi-plus'"></totem-form>
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">

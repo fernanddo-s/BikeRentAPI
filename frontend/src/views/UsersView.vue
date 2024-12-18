@@ -1,36 +1,3 @@
-<!-- <script setup>
-import Header from '@/components/header/Header.vue';
-import { reactive } from 'vue';
-
-const variaveis = reactive({
-  users: [
-    {
-      "cpf": "00900900909",
-      "login": "admin@mail.com",
-      "idade": 23,
-      "role": "ADMIN",
-      "matricula": "479528",
-      "nome": "ADMIN do Sistema",
-      "senha": "admin123"
-    }
-  ],
-  headers: [
-    { title: 'CPF', key: 'cpf'},
-    { title: 'Matricula', key: 'matricula' },
-    { title: 'Nome', key: 'nome' },
-    { title: 'Tipo de Acesso', key: 'role' }
-  ]
-})
-
-</script>
-
-<template>
-<Header></Header>
-<v-data-table :items="variaveis.users" :headers="variaveis.headers">
-
-</v-data-table>
-</template> -->
-
 <template>
   <Header></Header>
   <div class="div">
@@ -130,7 +97,7 @@ const variaveis = reactive({
 
 <script setup>
 import Header from '@/components/header/Header.vue';
-import { getUsuarios } from '@/services/UsuarioService';
+import { addUsuario, getUsuarios } from '@/services/UsuarioService';
 import { ref, computed, nextTick } from 'vue'
 
 const dialog = ref(false)
@@ -163,11 +130,12 @@ const defaultItem = {
 }
 
 const formTitle = computed(() =>
-  editedIndex.value === -1 ? 'New Item' : 'Edit Item'
+  editedIndex.value === -1 ? 'Novo Usuário' : 'Editando Usuário'
 )
 
 function initialize() {
   desserts.value = getUsuarios();
+  console.log("desserts value", desserts.value);
 }
 
 function editItem(item) {
@@ -207,7 +175,12 @@ function save() {
   if (editedIndex.value > -1) {
     Object.assign(desserts.value[editedIndex.value], editedItem.value)
   } else {
-    desserts.value.push({ ...editedItem.value })
+    // let u = addUsuario({ ...editedItem.value });
+    // console.log("Lista de usuário vindo do addUsuario", u);
+    // desserts.value = [];
+    // desserts.value = getUsuarios();
+    // console.log("Lista de usuarios pegando do getUsuarios de pois de um array vazio", desserts.value);
+    desserts.value.push({ ...editedItem.value }) // código original
   }
   close()
 }

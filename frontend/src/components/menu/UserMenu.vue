@@ -15,12 +15,12 @@ const variaveis = reactive({
 <template>
   <v-menu>
     <template v-slot:activator="{ props }">
-      <v-btn color="primary" dark v-bind="props" prepend-icon="mdi-account">Conta</v-btn>
+      <v-btn color="primary" dark v-bind="props" prepend-icon="mdi-account" variant="plain">Conta</v-btn>
     </template>
     <v-list>
       <v-list-item>
         <v-list-item-title>
-          <v-btn @click="$router.push({ path:'/usuarios' })" >Usuários</v-btn>
+          <v-btn @click="$router.push({ path:'/usuarios' })">Usuários</v-btn>
         </v-list-item-title>
         <v-list-item-title>
           <v-btn @click="$router.push({ path:'/bicicletas' })">Bicicletas</v-btn>
@@ -28,7 +28,6 @@ const variaveis = reactive({
       </v-list-item>
     </v-list>
   </v-menu>
-
 </template>
 
 <style scoped>
