@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 //Desabilitando spring security com (exclude = {ReactiveSecurityAutoConfiguration.class})
 //Retirar quando for usar autenticação
-@SpringBootApplication(exclude = {ReactiveSecurityAutoConfiguration.class})
+@SpringBootApplication
 public class AluguelbiciletaApplication {
 
 	public static void main(String[] args) {
