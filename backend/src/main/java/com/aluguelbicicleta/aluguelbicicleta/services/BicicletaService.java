@@ -3,6 +3,7 @@ package com.aluguelbicicleta.aluguelbicicleta.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.aluguelbicicleta.aluguelbicicleta.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,9 @@ public class BicicletaService {
     @Autowired
     TrancaRepository trancaRepository;
 
-    public Optional<Bicicleta> findById(Long id){
-        return bicicletaRepository.findById(id);
+    public Bicicleta findById(Long id){
+        return bicicletaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Bicicleta não encontrada com ID: " + id));
     }
 
     public List<Bicicleta> findAll(){
