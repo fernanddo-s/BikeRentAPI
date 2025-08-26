@@ -32,18 +32,14 @@ public class BicicletaController {
     private BicicletaService bicicletaService;
 
     @GetMapping
-    // @Operation(summary = "Busca todas as bicicletas", method = "GET")
-    // @ApiResponses(value = {
-    //     @ApiResponse(responseCode = "200", description = "Lista de bicicletas"),
-    // })
     public List<Bicicleta> findAll(){
         return bicicletaService.findAll();
     }
 
     @Transactional
     @GetMapping("/{id}")
-    public Optional<Bicicleta> findById(@PathVariable Long id){
-        return bicicletaService.findById(id);
+    public ResponseEntity<Bicicleta> findById(@PathVariable Long id){
+        return ResponseEntity.ok(bicicletaService.findById(id));
     }
 
     @Transactional
