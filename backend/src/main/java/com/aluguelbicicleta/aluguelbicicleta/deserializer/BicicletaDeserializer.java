@@ -42,7 +42,7 @@ public class BicicletaDeserializer extends JsonDeserializer<Bicicleta> {
             }
         }
         else {
-            throw new IOException("Formato de entrada inválido para Totem.");
+            throw new IOException("Formato de entrada inválido para Bicicleta.");
         }
 
         return bicicleta;
