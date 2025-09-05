@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import com.aluguelbicicleta.aluguelbicicleta.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +31,8 @@ public class BicicletaService {
                 .orElseThrow(() -> new ResourceNotFoundException("Bicicleta não encontrada com ID: " + id));
     }
 
-    public List<Bicicleta> findAll(){
-        return bicicletaRepository.findAll();
+    public Page<Bicicleta> findAll(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable){
+        return bicicletaRepository.findAll(pageable);
     }
 
     public Bicicleta create(Bicicleta b){
